@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>İlan Parser Uygulaması</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="container">
+    <h1>🏠 İlan Parser</h1>
+    <p>İlan HTML dosyasını yükleyin veya URL'yi girin:</p>
+
+    <form action="/parse" method="post" enctype="multipart/form-data">
+      <label for="file">HTML Dosyası Seç:</label>
+      <input type="file" name="file" id="file" accept=".html,.htm">
+      
+      <label for="url">veya İlan URL'si:</label>
+      <input type="text" name="url" id="url" placeholder="https://www.sahibinden.com/ilan/...">
+      
+      <button type="submit">🔍 İlanı İşle</button>
+    </form>
+
+    {% if result %}
+      <div class="result">
+        <h2>✅ İşlem Tamamlandı</h2>
+        <p><strong>Başlık:</strong> {{ result.title }}</p>
+        <p><strong>Fiyat:</strong> {{ result.price }}</p>
+        <p><strong>Telefon:</strong> {{ result.phone }}</p>
+        <p><strong>Görseller:</strong> {{ result.image_count }} adet</p>
+        <p><strong>CSV:</strong> ilanlar_full.csv dosyasına eklendi.</p>
+      </div>
+    {% endif %}
+  </div>
+</body>
+</html>
